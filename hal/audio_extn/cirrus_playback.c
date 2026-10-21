@@ -158,7 +158,7 @@ static struct cirrus_playback_session handle;
 #ifdef CIRRUS_FACTORY_CALIBRATION
 static void *audio_extn_cirrus_calibration_thread();
 #else
-static void *audio_extn_cirrus_config_thread();
+static void *audio_extn_cirrus_config_thread(void *context);
 #endif
 
 #ifdef ENABLE_CIRRUS_DETECTION
@@ -553,7 +553,7 @@ exit:
 }
 
 #else
-static void *audio_extn_cirrus_config_thread(void) {
+static void *audio_extn_cirrus_config_thread(void *context __unused) {
     struct audio_device *adev = handle.adev_handle;
     struct crus_sp_ioctl_header header;
     struct cirrus_cal_result_t result;
